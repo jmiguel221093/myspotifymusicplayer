@@ -1,0 +1,76 @@
+$playlist-header-margin-right: spacing()
+$playlist-header-playlist-info-margin-left: spacing(loose)
+$playlist-header-playlist-info-max-width: 100%
+
+$playlist-header-caption-color: color(secondary)
+$playlist-header-caption-color-strong: color(primary)
+$playlist-header-caption-separator-spacing: spacing(tight)
+
+$playlist-play-button-background-color: none
+$playlist-play-button-background-hover-color: rgba(color(white),0.15)
+$playlist-play-button-blur: 10px
+
+$playlist-header-margin-bottom: spacing(loose)
+
+$playlist-header-image-box-shadow: 0 30px 60px rgba(color(primary), 0.55)
+
+.playlist-header
+    display: flex
+    align-items: center
+    margin-left: -55px
+    margin-bottom: $playlist-header-margin-bottom
+    .back-button-container
+        &:not(:last-child)
+            margin-right: $playlist-header-margin-right
+    .playlist-info-container
+        display: flex
+        align-items: center
+        .playlist-image
+            position: relative
+            .image
+                +box-shadow($playlist-header-image-box-shadow)
+                opacity: 0
+                +transform(translate3d(0,10%,0))
+                +animation(list-item, 300ms, forwards, cubic-bezier(0.215, 0.61, 0.355, 1))
+            .icon-button
+                position: absolute
+                left: 0
+                right: 0
+                top: 0
+                bottom: 0
+                margin: auto
+                background: $playlist-play-button-background-color
+                +backdrop-filter(blur($playlist-play-button-blur))
+                z-index: 2
+                opacity: 0
+                +transition(all $transition-base-duration $transition-base-ease)
+                &:hover
+                    background-color: $playlist-play-button-background-hover-color
+        .playlist-info
+            max-width: $playlist-header-playlist-info-max-width
+            margin-left: $playlist-header-playlist-info-margin-left
+            p
+                opacity: 0
+                +transform(translate3d(0,50%,0))
+                +animation(list-item, 300ms, forwards, cubic-bezier(0.215, 0.61, 0.355, 1), 100ms)
+                margin: 0
+                color: $playlist-header-caption-color
+                strong
+                    color: $playlist-header-caption-color-strong
+                .meta-data-item
+                    display: inline-flex
+                    align-items: center
+                    &:not(:last-child)
+                        &:after
+                            content: ''
+                            display: block
+                            flex: none
+                            width: 4px
+                            height: 4px
+                            border-radius: 50%
+                            background: $playlist-header-caption-color
+                            margin-left: $playlist-header-caption-separator-spacing
+                            margin-right: $playlist-header-caption-separator-spacing
+        &:hover
+            .icon-button
+                opacity: 1

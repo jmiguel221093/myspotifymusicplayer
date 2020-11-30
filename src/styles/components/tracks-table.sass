@@ -1,0 +1,93 @@
+$tracks-table-item-element-font-weight: $font-weight-medium
+$tracks-table-item-element-track-name-font-weight: $font-weight-semi-bold
+
+$tracks-table-item-element-spacing-horizontal: to-rem(15px/2)
+$tracks-table-item-element-spacing-vertical: spacing()
+$tracks-table-item-element-color: rgba(color(primary), 0.7)
+
+$tracks-table-item-name-width: auto
+$tracks-table-item-artists-width: 15%
+$tracks-table-item-album-width: 30%
+    
+.tracks-table
+    display: table
+    width: 100%
+    table-layout: fixed
+    .tracks-table-body
+        display: table-row-group
+        .tracks-table-item
+            opacity: 0
+            +transform(translate3d(0,35px,0))
+            +animation(list-item, 300ms, forwards, $list-items-wrapper-transition-ease, 100ms)
+            display: table-row
+            cursor: pointer
+            .tracks-table-item-element
+                display: table-cell
+                vertical-align: middle
+                font-weight: $tracks-table-item-element-font-weight
+                padding-left: $tracks-table-item-element-spacing-horizontal
+                padding-right: $tracks-table-item-element-spacing-horizontal
+                padding-top: $tracks-table-item-element-spacing-vertical
+                padding-bottom: $tracks-table-item-element-spacing-vertical
+                &, a
+                    color: $tracks-table-item-element-color
+                    +transition(color 300ms $transition-base-ease)
+                &.track-index
+                    width: 30px
+                &.track-image
+                    width: 55px
+                    position: relative
+                    .track-icon
+                        width: 40px
+                        height: 40px
+                        border-radius: 10px
+                        background: color(primary)
+                        color: color(white)
+                        position: relative
+                        .icon
+                            position: absolute
+                            display: inline-block
+                            left: 50%
+                            top: 50%
+                            +transform(translate3d(-50%, -50%, 0))
+                    .icon-button
+                        position: absolute
+                        left: 50%
+                        top: 50%
+                        +transform(translate3d(-50%, -50%, 0))
+                        color: color(white)
+                        +backdrop-filter(blur(10px))
+                        background: rgba(color(white), 0)
+                        opacity: 0
+                        +transition(opacity 300ms $transition-base-ease)
+                &.track-index,
+                &.track-duration
+                    text-align: right
+                &.track-name
+                    width: $tracks-table-item-name-width
+                    span
+                        font-weight: $tracks-table-item-element-track-name-font-weight
+                        display: block
+                        color: color(primary)
+                    .artist
+                        font-size: 12px
+                        color: color(secondary)
+                &.track-album
+                    white-space: nowrap
+                    overflow: hidden
+                    text-overflow: ellipsis
+                    width: $tracks-table-item-album-width
+                &.track-duration
+                    width: 60px
+                &.track-action
+                    width: 56px
+            &.is-playing, &:hover
+                .tracks-table-item-element
+                    &, a
+                        color: color(primary)
+                    &.track-image
+                        .icon-button
+                            opacity: 1
+                    &.track-name
+                        .artist
+                            color: color(primary)

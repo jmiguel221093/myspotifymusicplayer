@@ -1,0 +1,21 @@
+.about-modal
+    .modal-body
+        height: inherit
+        padding: spacing(loose) 0
+        display: flex
+        flex-direction: column
+        align-items: center
+        .content
+            width: 100%
+            padding: 0 spacing(loose) spacing(x-loose)
+            max-width: 930px
+            flex: 1 1 0
+            .display-text
+                font-weight: $font-weight-semi-bold
+            p
+                line-height: 2
+                &:not(:last-child)
+                    margin-bottom: spacing(x-loose)
+                a
+                    font-weight: $font-weight-semi-bold
+                    text-decoration: underline

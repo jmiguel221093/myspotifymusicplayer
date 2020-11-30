@@ -1,0 +1,98 @@
+=prefix($declarations, $prefixes: ())
+	@each $property, $value in $declarations 
+    	@each $prefix in $prefixes 
+      		#{'-' + $prefix + '-' + $property}: $value
+    	#{$property}: $value
+
+=border-box
+    +prefix((box-sizing: border-box), webkit moz)
+
+=transform($properties...)
+	+prefix((transform: $properties), webkit moz)
+
+=transition($properties...)
+	+prefix((transition: $properties), webkit moz)
+
+=box-shadow($properties...)
+	+prefix((box-shadow: $properties), webkit moz)
+
+=filter($properties...)
+	+prefix((filter: $properties), webkit)
+
+=backdrop-filter($property)
+	+prefix((backdrop-filter: $property), webkit)
+
+=background-image-setup
+	background-repeat: no-repeat
+	background-size: cover
+	background-position: center
+
+=no-user-select
+	+prefix((user-select: none), webkit moz)
+
+=none-appearance
+	+prefix((appearance: none), moz webkit)
+
+@mixin placeholder
+	&.placeholder 
+		@content
+	&:-moz-placeholder
+		@content
+	&::-webkit-input-placeholder
+		@content
+
+=no-list-style
+	list-style: none
+	padding: 0
+	margin: 0
+
+// childish
+=unless-last-child
+	&:not(:last-child)
+		@content
+=unless-first-child
+	&:not(:last-child)
+		@content
+
+=animation($name, $duration, $fill-mode: forwards, $ease: $transition-base-ease, $delay: 0s, $count: 1, $direction: normal)
+	+prefix((animation-name: $name), webkit moz)
+	@if($duration != null)
+		+prefix((animation-duration: $duration), webkit moz)
+	+prefix((animation-fill-mode: $fill-mode), webkit moz)
+	+prefix((animation-timing-function: $ease), webkit moz)
+	+prefix((animation-delay: $delay), webkit moz)
+	+prefix((animation-iteration-count: $count), webkit moz)
+	+prefix((animation-direction: $direction), webkit moz)
+
+=animation-play-state($state)
+	+prefix((animation-play-state: $state), moz webkit)
+
+=keyframes($name)
+	@-webkit-keyframes #{$name}
+		@content
+	@-moz-keyframes #{$name}
+		@content
+	@-ms-keyframes #{$name}
+		@content
+	@keyframes #{$name}
+		@content
+
+=responsive($size)
+	@media only screen and (min-width: $size)
+		@content
+
+=sm-screen
+	+responsive($screen-small)
+		@content
+
+=md-screen
+	+responsive($screen-medium)
+		@content
+
+=lg-screen
+	+responsive($screen-large)
+		@content
+
+=xl-screen
+	+responsive($screen-extra-large)
+		@content

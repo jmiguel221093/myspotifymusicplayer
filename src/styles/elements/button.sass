@@ -1,0 +1,63 @@
+$button-background: color(primary)
+$button-font-color: color(white)
+
+$button-font-weight: $font-weight-semi-bold
+$button-padding-vertical: spacing(tight)
+$button-padding-horizontal: spacing(medium)
+
+$button-border-radius: $radius
+
+$button-icon-size: 16px
+$button-icon-spacing: spacing(tight)
+
+$button-default-size: 40px
+
+$button-large-size: 60px
+$button-large-font-size: to-rem(18px)
+$button-large-padding-horizontal: spacing(loose)
+$button-large-icon-size: 20px
+$button-large-border-radius: $radius-medium
+
+.button
+    +none-appearance
+    display: inline-flex
+    align-items: center
+    justify-content: center
+    text-align: center
+    text-decoration: none
+    +no-user-select
+    border: none
+    font-size: inherit
+    font-weight: $button-font-weight
+    line-height: $button-default-size
+    padding: 0
+    padding-left: $button-padding-horizontal
+    padding-right: $button-padding-horizontal
+    border-radius: $button-border-radius
+    background: $button-background
+    color: $button-font-color
+    cursor: pointer
+    outline: none
+    +transition(background $transition-base-duration $transition-base-ease)
+    .icon
+        width: $button-icon-size
+        height: auto
+    &.icon-left
+        .icon
+            margin-right: $button-icon-spacing
+    &.icon-right
+        .icon
+            margin-left: $button-icon-spacing
+    &.clean
+        background: none
+        color: $button-background
+        &:hover, &.active
+            background: rgba(color(primary), 0.2)
+    &.large
+        line-height: $button-large-size
+        font-size: $button-large-font-size
+        padding-left: $button-large-padding-horizontal
+        padding-right: $button-large-padding-horizontal
+        border-radius: $button-large-border-radius
+        .icon
+            width: $button-large-icon-size

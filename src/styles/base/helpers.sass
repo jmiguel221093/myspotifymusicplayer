@@ -1,0 +1,47 @@
+// Color clases
+@each $color-name, $color in $colors
+    .bg-#{$color-name}
+        background-color: $color
+    .text-#{$color-name}
+        color: $color
+
+$text-alignments: (center, left, right)
+@each $text-alignment in $text-alignments
+    .text-#{$text-alignment}
+        text-align: $text-alignment
+
+$spacings-side: (t: top, b: bottom, l: left, r: right)
+@each $spacing-name, $spacing in $spacings
+    @each $side-name, $side in $spacings-side
+        .m#{$side-name}-#{$spacing-name}
+            margin-#{$side}: $spacing
+        .p#{$side-name}-#{$spacing-name}
+            padding-#{$side}: $spacing
+    .mh-#{spacing-name}
+        margin-left: $spacing
+        margin-right: $spacing
+    .mv-#{spacing-name}
+        margin-top: $spacing
+        margin-bottom: $spacing
+    .ph-#{spacing-name}
+        padding-left: $spacing
+        padding-right: $spacing
+    .pv-#{spacing-name}
+        padding-top: $spacing
+        padding-bottom: $spacing
+
+.shadow
+    +box-shadow(0 30px 60px rgba(color(secondary-light), 0.55))
+
+.fade-enter
+    opacity: 0
+
+.fade-enter-active
+    opacity: 1
+
+.fade-exit 
+    opacity: 1
+
+.fade-exit-active
+    opacity: 0
+    // +transition(none !important)

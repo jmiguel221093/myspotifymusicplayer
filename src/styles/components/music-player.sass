@@ -1,0 +1,237 @@
+$music-player-spacing: spacing(loose)
+
+$music-player-current-track-info-margin-left: spacing(tight)
+$music-player-current-track-name-font-weight: $font-weight-semi-bold
+$music-player-current-track-name-artists-font-size: $text-caption
+$music-player-current-track-name-artists-font-color: color(secondary)
+
+$music-player-extra-controls-control-margin-right: spacing()
+
+$music-player-controls-control-spacing: spacing()
+
+$music-player-playback-span-font-size: 12px
+$music-player-playback-bar-padding-horizontal: spacing(tight)
+$music-player-playback-bar-padding-vertical: spacing()
+$music-player-playback-bar-background-color: rgba(color(primary), 0.3)
+$music-player-playback-bar-foreground-color: color(primary)
+$music-player-playback-bar-thumb-color: color(primary)
+$music-player-playback-bar-thumb-border-color: color(white)
+$music-player-playback-bar-thumb-size: 12px
+$music-player-playback-bar-thumb-border-width: 3px
+
+$music-player-extra-controls-volume-bar-box-shadow: 0 30px 60px rgba(color(primary), 0.55)
+
+=current-track
+    #{&}-current-track
+        display: flex
+        .track-info
+            margin-left: $music-player-current-track-info-margin-left
+            flex: 1 1 0
+            flex-wrap: wrap
+            min-width: 1px
+            white-space: nowrap
+            overflow: hidden
+            text-overflow: ellipsis
+            span
+                display: block
+                white-space: nowrap
+                overflow: hidden
+                text-overflow: ellipsis
+                &.track-name
+                    font-weight: $music-player-current-track-name-font-weight
+            .artists
+                color: $music-player-current-track-name-artists-font-color
+                font-size: 12px
+                a
+                    font-size: 12px
+                    // font-size: $music-player-current-track-name-artists-font-size
+                    color: $music-player-current-track-name-artists-font-color
+
+=extra-controls
+    #{&}-extra-controls
+        display: flex
+        align-items: center
+        justify-content: flex-end
+        & > *
+            &:not(:last-child)
+                margin-right: $music-player-extra-controls-control-margin-right
+
+.music-player
+    padding: $music-player-spacing
+    display: flex
+    align-items: center
+    justify-content: center
+    #{&}-element
+        flex: 1 1 0
+        min-width: 1px
+        &:not(:last-child)
+            padding-right: spacing()
+        &:not(:first-child)
+            padding-left: spacing()
+        &.automatic
+            flex: none
+            width: auto
+    +current-track
+    +extra-controls
+    .music-player-controls
+        display: flex
+        align-items: center
+        justify-content: center
+        & > *
+            &:not(:last-child)
+                margin-right: spacing(loose)
+        .player-controls
+            flex: none
+            width: auto
+            display: flex
+            align-items: center
+            & > *
+                &:not(:last-child)
+                    margin-right: $music-player-controls-control-spacing
+            .repeat-control
+                position: relative
+                .repeat-mode-track
+                    position: absolute
+                    width: 4px
+                    height: 4px
+                    display: flex
+                    top: 100%
+                    left: 50%
+                    border-radius: 50%
+                    background-color: color(primary)
+                    color: color(white)
+                    align-items: center
+                    justify-content: center
+                    +transform(translate3d(-50%, -230%, 0))
+        .playback-bar-container
+            .music-player-playback-bar
+                display: flex
+                align-items: center
+                justify-content: center
+                .playback-progress,
+                .playback-duration
+                    font-size: $music-player-playback-span-font-size
+                    flex: none
+                    min-width: 45px
+                    &.playback-duration
+                        padding-left: $music-player-playback-bar-padding-horizontal
+                    &.playback-progress
+                        text-align: right
+                        padding-right: $music-player-playback-bar-padding-horizontal
+                .progress-bar
+                    flex: none
+                    width: 320px
+                    padding-top: $music-player-playback-bar-padding-vertical
+                    padding-bottom: $music-player-playback-bar-padding-vertical
+                    cursor: pointer
+                    .progress-bar-bg
+                        position: relative
+                        height: 2px
+                        border-radius: 10px
+                        background-color: $music-player-playback-bar-background-color
+                        .progress-bar-fg
+                            position: relative
+                            background-color: $music-player-playback-bar-foreground-color
+                            height: inherit
+                            border-radius: 10px
+                            +transition(width 1000ms $transition-base-ease)
+                            &:after
+                                content: ''
+                                position: absolute
+                                width: $music-player-playback-bar-thumb-size
+                                height: $music-player-playback-bar-thumb-size
+                                border-radius: 50%
+                                border: solid $music-player-playback-bar-thumb-border-width $music-player-playback-bar-thumb-border-color
+                                background-color: $music-player-playback-bar-thumb-color
+                                top: 50%
+                                right: 0
+                                +transform(translate3d(50%, -50%, 0) scale(0))
+                                +transition(transform 300ms $transition-base-ease)
+                    &:hover
+                        .progress-bar-bg
+                            .progress-bar-fg
+                                &:after
+                                    +transform(translate3d(50%, -50%, 0) scale(1))
+    #{&}-extra-controls
+        .volume-control
+            position: relative
+            .volume-bar-container
+                position: absolute
+                bottom: 100%
+                padding-bottom: spacing(tight)
+                opacity: 0
+                display: none
+                +transition(opacity 300ms $transition-base-ease)
+                width: 100%
+                height: 110px
+                .volume-bar-control
+                    width: 100%
+                    height: 100%
+                    background-color: color(white)
+                    padding: spacing()
+                    +box-shadow($music-player-extra-controls-volume-bar-box-shadow)
+                    border-radius: $radius
+                    display: flex
+                    flex-direction: column
+                    .volume-bar
+                        width: 100%
+                        flex: 1 1 0
+                        cursor: pointer
+                        .volume-bar-bg
+                            position: relative
+                            background-color: color(secondary)
+                            height: 100%
+                            width: 2px
+                            border-radius: 10px
+                            margin: auto
+                            .volume-bar-fg
+                                position: absolute
+                                background-color: color(primary)
+                                bottom: 0
+                                border-radius: 10px
+                                width: 100%
+                                +transition(height 600ms $transition-base-ease)
+                                &:after
+                                    content: ''
+                                    position: absolute
+                                    top: 0
+                                    left: 50%
+                                    +transform(translate3d(-50%, -50%, 0) scale(0))
+                                    width: $music-player-playback-bar-thumb-size
+                                    height: $music-player-playback-bar-thumb-size
+                                    border-radius: 50%
+                                    border: solid $music-player-playback-bar-thumb-border-width $music-player-playback-bar-thumb-border-color
+                                    background-color: $music-player-playback-bar-thumb-color
+                                    +transition(transform 300ms $transition-base-ease)
+                        &:hover
+                            .volume-bar-bg
+                                .volume-bar-fg
+                                    &:after
+                                        +transform(translate3d(-50%, -50%, 0) scale(1))
+                &.show
+                    opacity: 1
+    &.is-fullscreen
+        *
+            color: color(white)
+        .music-player-element
+            flex: none
+            width: auto
+            &.automatic
+                justify-self: center
+        .icon-button
+            &:hover, &.active
+                background-color: rgba(color(white), 0.2)
+        .playback-bar-container
+            .progress-bar
+                .progress-bar-bg
+                    background-color: rgba(color(white), 0.3) !important
+                .progress-bar-fg
+                    background-color: color(white) !important
+                    &:after
+                        border: none !important
+                        width: 10px !important
+                        height: 10px !important
+                        background-color: color(white) !important
+        .repeat-control
+            .repeat-mode-track
+                background-color: color(white) !important

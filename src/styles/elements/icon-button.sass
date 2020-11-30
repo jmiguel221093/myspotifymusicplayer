@@ -1,0 +1,14 @@
+$icon-button-default-size: 40px
+$icon-button-large-size: 60px
+
+.icon-button
+    @extend .button
+    flex: none
+    width: $icon-button-default-size
+    height: $icon-button-default-size
+    padding: 0 !important
+    .icon
+        flex: none
+    &.large
+        width: $icon-button-large-size
+        height: $icon-button-large-size

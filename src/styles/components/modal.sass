@@ -1,0 +1,71 @@
+$modal-background-color: color(white)
+$modal-close-button-spacing: spacing(x-loose)
+
+$modal-action-list-item-font-size: $text-display-normal
+$modal-action-list-item-font-weight: $font-weight-semi-bold
+$modal-action-list-item-spacing: spacing(x-loose)
+    
+.modal
+    position: fixed
+    width: 100vw
+    height: 100vh
+    background: $modal-background-color
+    top: 0
+    left: 0
+    z-index: 99
+    opacity: 0
+    display: none
+    +animation(modal, 600ms, forwards, $transition-base-ease)
+    &.open
+        display: block
+    &.closing
+        display: block
+        opacity: 1
+        +animation(modal-closing, 600ms, forwards, $transition-base-ease)
+    .modal-body
+        position: absolute
+        text-align: center
+        top: 50%
+        left: 50%
+        +transform(translate3d(-50%, -50%, 0))
+        width: 100%
+        .modal-close-icon
+            &:not(:last-child)
+                margin-bottom: $modal-close-button-spacing
+            &:not(:first-child)
+                margin-top: $modal-close-button-spacing
+        .display-text
+            margin-bottom: $modal-close-button-spacing
+    .modal-action-list
+        list-style: none
+        padding: 0
+        margin: 0
+        li
+            +transform(translate3d(0,50%,0))
+            opacity: 0
+            +animation(modal-actions-list-item, 600ms, forwards, cubic-bezier(0.215, 0.61, 0.355, 1))
+            &:not(:last-child)
+                margin-bottom: $modal-action-list-item-spacing
+            button
+                +none-appearance
+                border: none
+                background: none
+                font-size: $modal-action-list-item-font-size
+                font-weight: $modal-action-list-item-font-weight
+                cursor: pointer
+                outline: none
+            &.danger
+                button
+                    color: color(error)
+                
+
++keyframes(modal)
+    to
+        opacity: 1
++keyframes(modal-closing)
+    to
+        opacity: 0
++keyframes(modal-actions-list-item)
+    to
+        +transform(translate3d(0,0,0))
+        opacity: 1

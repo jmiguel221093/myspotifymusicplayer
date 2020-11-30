@@ -1,0 +1,97 @@
+$drawer-background-color: rgba(color(white), 0.95)
+
+$drawer-content-max-width: 44vw
+$drawer-content-background: color(white)
+$drawer-content-box-shadow: -30px 0 60px rgba(color(primary), 0.16)
+$drawer-content-padding: spacing(loose)
+    
+.drawer
+    width: inherit
+    height: inherit
+    background: $drawer-background-color
+    display: flex
+    align-items: stretch
+    justify-content: flex-end
+    opacity: 0
+    +animation(drawer-dimm, 600ms, forwards, $transition-base-ease)
+    &.closing
+        opacity: 1
+        +animation(drawer-dimm-closing, 600ms, forwards, $transition-base-ease, 300ms)
+    #{&}-content
+        width: 100%
+        max-width: $drawer-content-max-width
+        background: $drawer-content-background
+        +box-shadow($drawer-content-box-shadow)
+        padding: $drawer-content-padding
+        text-align: right
+        display: flex
+        flex-direction: column
+        justify-content: space-between
+        +transform(translateX(100%))
+        opacity: 0
+        +animation(drawer-content, 600ms, forwards, cubic-bezier(0.215, 0.61, 0.355, 1))
+        .close-button
+            margin-bottom: spacing(loose)
+        ul
+            flex: none
+            width: 100%
+            list-style: none
+            padding: 0
+            margin: 0
+            li
+                padding: 0 spacing(loose)
+                opacity: 0
+                +transform(translateY(100%))
+                +animation(drawer-content-item, 600ms, forwards, cubic-bezier(0.215, 0.61, 0.355, 1), 300ms)
+                &:not(:last-child)
+                    margin-bottom: spacing()
+                button
+                    outline: none
+                .main-item
+                    background: none
+                    border: none
+                    text-decoration: none
+                    padding: 0
+                    margin: 0
+                    font-weight: $font-weight-semi-bold
+                    font-size: $text-display-medium
+                    cursor: pointer
+                .sub-item
+                    background: none
+                    border: none
+                    text-decoration: none
+                    padding: 0
+                    margin: 0
+                    font-weight: $font-weight-semi-bold
+                    font-size: $text-display-small
+                    cursor: pointer
+        .meta
+            padding: spacing(loose)
+            margin-top: spacing(loose)
+            p
+                margin: 0
+                font-size: $text-caption
+                color: rgba(color(primary), 0.6)
+    &.closing
+        .drawer-content
+            +transform(translateX(0%))
+            opacity: 1
+            +animation(drawer-content-closing, 600ms, forwards, cubic-bezier(0.215, 0.61, 0.355, 1))
++keyframes(drawer-dimm)
+    to
+        opacity: 1
++keyframes(drawer-dimm-closing)
+    to
+        opacity: 0
++keyframes(drawer-content)
+    to
+        +transform(translateX(0))
+        opacity: 1
++keyframes(drawer-content-closing)
+    to
+        +transform(translateX(100%))
+        opacity: 0
++keyframes(drawer-content-item)
+    to
+        +transform(translateY(0))
+        opacity: 1

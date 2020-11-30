@@ -1,0 +1,21 @@
+$input-field-font-weight: $font-weight-semi-bold
+$input-field-placeholder-color: color(secondary)
+
+$input-field-large-font-size: $text-display-large
+
+.input-field
+    display: inline-flex
+    align-items: center
+    position: relative
+    input
+        width: 100%
+        border: none
+        outline: none
+        background: none
+        font-weight: $input-field-font-weight
+        line-height: 1
+        +placeholder
+            color: $input-field-placeholder-color
+    &.is-large
+        input
+            font-size: $input-field-large-font-size

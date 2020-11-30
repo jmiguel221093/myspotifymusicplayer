@@ -1,0 +1,60 @@
+$topbar-padding: spacing(loose)
+
+$topbar-background: color(white)
+
+$topbar-menu-actions-menu-item-spacing: spacing(loose)
+$topbar-menu-actions-menu-item-font-weight: $font-weight-semi-bold
+$topbar-menu-actions-menu-item-font-color: color(secondary)
+$topbar-menu-actions-menu-item-font-active-color: color(primary)
+
+$topbar-avatar-username-spacing: spacing(medium)
+$topbar-avatar-username-font-weight: $font-weight-semi-bold
+
+.topbar
+    background-color: $topbar-background
+    padding: $topbar-padding
+    .topbar-menu-actions
+        display: flex
+        align-items: center
+        .top-bar-menu
+            +no-list-style
+            display: flex
+            align-items: center
+            li:not(:last-child)
+                margin-right: $topbar-menu-actions-menu-item-spacing
+            li
+                a
+                    color: $topbar-menu-actions-menu-item-font-color
+                    font-weight: $topbar-menu-actions-menu-item-font-weight
+                    +transition(color $transition-base-duration $transition-base-ease)
+                    &:hover, &.active
+                        color: $topbar-menu-actions-menu-item-font-active-color
+        .top-bar-extra-actions
+            margin-left: spacing()
+            .icon-button
+                &:not(:last-child)
+                    margin-right: spacing()
+    .avatar-container
+        .avatar
+            display: flex
+            align-items: center
+            cursor: pointer
+            padding: spacing(tight)
+            margin-top: -#{spacing(tight)}
+            margin-right: -#{spacing(tight)}
+            border-radius: $radius
+            +transition(background $transition-base-duration $transition-base-ease)
+            &:hover
+                background: rgba(color(primary),0.05)
+            .username
+                margin-right: $topbar-avatar-username-spacing
+                font-weight: $topbar-avatar-username-font-weight
+            .avatar-icon
+                background: color(primary)
+                color: color(white)
+                width: 40px
+                height: 40px
+                border-radius: 10px
+                display: flex
+                align-items: center
+                justify-content: center

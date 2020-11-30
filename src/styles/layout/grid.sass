@@ -1,0 +1,24 @@
+$grid-items-alignments: (start: flex-start, center: center, end: flex-end)
+$grid-items-justify: (start: flex-start, center: center, end: flex-end)
+
+$grid-column-size: to-fixed(100/12)
+    
+.grid
+    display: flex
+    flex-wrap: wrap
+    flex-direction: row
+    @each $alignment-name, $alignment in $grid-items-alignments
+        &.align-items-#{$alignment-name}
+            align-items: $alignment
+    @each $justify-name, $justify in $grid-items-justify
+        &.align-items-#{$justify-name}
+            align-items: $justify
+    .column
+        flex: 1 1 0
+        @for $i from 1 through 12
+            &.size-#{$i}
+                flex: none
+                width: #{$i * 1% * $grid-column-size}
+        &.size-auto
+            flex: none
+            width: auto

@@ -1,0 +1,94 @@
+$list-items-wrapper-transition-ease: cubic-bezier(0.215, 0.61, 0.355, 1)
+$list-items-wrapper-padding: to-rem(45px)
+$list-items-wrapper-padding-top: spacing(loose)
+
+$list-item-box-shadow: 0 15px 33px rgba(color(primary), 0.5)
+$list-item-overlay-border-radius: 4.5vh
+
+$list-item-play-button-background-color: rgba(color(white),0.15)
+$list-item-play-button-background-hover-color: rgba(color(white),0.3)
+$list-item-play-button-blur: 30px
+
+
+.list
+    overflow: hidden
+    -webkit-overflow-scrolling: touch
+    // text-align: center
+    &::-webkit-scrollbar
+        display: none
+    .list-items-wrapper
+        padding-left: $list-items-wrapper-padding
+        padding-right: $list-items-wrapper-padding
+        padding-top: $list-items-wrapper-padding-top
+        display: flex
+        flex-wrap: nowrap
+        box-sizing: content-box
+        position: relative
+        +transition(transform 600ms $list-items-wrapper-transition-ease)
+        margin: auto
+        .list-item
+            flex: 0 0 auto
+            padding-left: spacing()
+            padding-right: spacing()
+            +transform(translate3d(70px, 0, 0) scale(0.95))
+            opacity: 0
+            +animation(list-item, 600ms, forwards, $list-items-wrapper-transition-ease)
+            .list-item-container
+                cursor: pointer
+                text-align: left
+                .image-container
+                    position: relative
+                    z-index: 0
+                    .image
+                        +transition(box-shadow $transition-base-duration $transition-base-ease)
+                    &:after
+                        content: ''
+                        position: absolute
+                        left: 0
+                        top: 0
+                        width: 100%
+                        height: 100%
+                        border-radius: $list-item-overlay-border-radius
+                        background: color(primary)
+                        background: -moz-linear-gradient(0deg, rgba(color(primary),0.8) 0%, rgba(color(primary),0) 100%)
+                        background: -webkit-linear-gradient(0deg, rgba(color(primary),0.8) 0%, rgba(color(primary),0) 100%)
+                        background: linear-gradient(0deg, rgba(color(primary),0.8) 0%, rgba(color(primary),0) 100%)
+                        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#{color(primary)}",endColorstr="#{color(primary)}",GradientType=1)
+                        z-index: 1
+                        opacity: 0
+                        +transition(opacity $transition-base-duration $transition-base-ease)
+                    .icon-button
+                        position: absolute
+                        left: 50%
+                        top: 50%
+                        +transform(translate3d(-50%, -50%, 0))
+                        background: $list-item-play-button-background-color
+                        +backdrop-filter(blur($list-item-play-button-blur))
+                        z-index: 2
+                        opacity: 0
+                        +transition(all $transition-base-duration $transition-base-ease)
+                        &:hover
+                            background-color: $list-item-play-button-background-hover-color
+                .list-item-title
+                    font-weight: $font-weight-bold
+                    margin-bottom: 0
+                    max-width: 30vh
+                    font-size: 2.4vh
+                .text-caption
+                    margin: 0
+                    color: color(secondary)
+                    max-width: 30vh
+                    // +responsive(1600px)
+                    //     font-size: 1.6vh
+                &:hover
+                    .image-container
+                        .image
+                            +box-shadow($list-item-box-shadow)
+                        &:after,
+                        .icon-button
+                            opacity: 1
+
++keyframes(list-item)
+    to
+        +transform(translate3d(0,0,0) scale(1))
+        opacity: 1

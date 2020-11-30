@@ -1,0 +1,53 @@
+@function pow($x, $n) 
+    $ret: 1
+    @if $n >= 0 
+        @for $i from 1 through $n 
+            $ret: $ret * $x
+    @else 
+        @for $i from $n to 0 
+            $ret: $ret / $x
+    @return $ret
+
+@function to-fixed($float, $digits: 2) 
+    $sass-precision: 5
+    @if $digits > $sass-precision 
+        @warn "Sass sets default precision to #$sass-precision digits, and there is no way to change that for now."+ "The returned number will have #$sass-precision digits, even if you asked for `#$digits`."+ "See https://github.com/sass/sass/issues/1122 for further informations."
+    $pow: pow(10, $digits)
+    @return round($float * $pow) / $pow
+
+@function spacing($size: normal)
+    $spacing-size: 0
+    @if $size != none
+        $spacing-size: to-rem(map-get($spacings, $size))
+    @return $spacing-size
+
+@function tint($color, $intensity)
+    @return mix(#ffffff, $color, $intensity)
+
+@function shade($color, $intensity)
+    @return mix(#000000, $color, $intensity)
+
+@function isLightColor($color)
+    @return lightness($color) > 85
+
+@function to-rem($size)
+    @return #{to-fixed($size/$base-size)}rem
+@function to-vh($size)
+    $screen-size: 768px
+    @return #{to-fixed(($size*100)/$screen-size)}vh
+
+@function str-replace($string, $search, $replace: '')
+    $index: str-index($string, $search)
+    @if $index
+        @return str-slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + str-length($search)), $search, $replace)
+    @return $string
+
+@function color($color: null)
+    @if $color
+        @return map-get($colors, $color)
+    
+@function text-size($size: body)
+    $text-size: 0
+    @if $size != none
+        $text-size: to-rem(map-get($text-sizes, $size))
+    @return $text-size

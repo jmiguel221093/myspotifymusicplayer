@@ -1,0 +1,31 @@
+#login-screen
+    height: 100vh
+    display: flex
+    justify-content: center
+    align-items: center
+    .content
+        .app-title
+            margin-top: 0
+        .app-description
+            margin: auto
+            font-size: to-rem(16px)
+            line-height: 30px
+            max-width: 710px
+            a
+                font-weight: $font-weight-semi-bold
+        .button
+            outline: none
+            width: 126px
+            height: 126px
+            border-radius: 50%
+            border: none
+            background: color(white)
+            color: color(primary)
+            cursor: pointer
+            +transition(transform $transition-base-duration cubic-bezier(0.68, -0.55, 0.265, 1.55))
+            &:hover
+                +transform(scale(1.1))
+            .icon
+                width: 40px
+                height: auto
+                margin-left: 5px

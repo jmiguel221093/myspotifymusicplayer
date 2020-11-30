@@ -1,0 +1,43 @@
+$scroll-view-content-transition-ease: cubic-bezier(0.215, 0.61, 0.355, 1)
+
+.scroll-view
+    position: relative
+    height: 100%
+    .scroll-view-screen,
+    .scroll-view-scroll-screen
+        position: absolute
+        left: 0
+        top: 0
+        width: 100%
+        height: 100%
+        overflow: hidden
+    .scroll-view-scroll-screen
+        overflow: auto
+        .scroll-view-height-container
+            overflow: hidden
+            position: relative
+            .scroll-view-content
+                overflow: hidden
+                top: 0
+                left: 0
+                width: 100%
+                +transition(transform 600ms $scroll-view-content-transition-ease)
+    #{&}-thumb-container
+        position: absolute
+        width: 10px
+        height: 100%
+        right: 0
+        overflow: hidden
+        +transform(translateX( calc(100% + #{spacing(tight)}) ))
+        .scroll-view-thumb
+            width: 5px
+            position: absolute
+            right: 0
+            left: 0
+            margin: auto
+            background: rgba(color(primary), 0.2)
+            border-radius: 10px
+            opacity: 0
+            +transition(all $transition-base-duration $transition-base-ease)
+            &.show
+                opacity: 1

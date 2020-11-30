@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap')
+
+html
+    font-family: 'Poppins', sans-serif
+    color: color(primary)
+    font-size: $base-size
+
+@each $text-size-name, $text-size in $text-sizes
+    .text-#{$text-size-name}
+        font-size: $text-size
+
+@each $font-weight-name, $font-weight in $font-weights
+    .font-weight-#{$font-weight-name}
+        font-weight: $font-weight
+
+a
+    color: color(primary)
+    text-decoration: none
+
